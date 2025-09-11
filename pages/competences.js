@@ -4,7 +4,7 @@ const container = document.getElementById("canvas-container");
 
 const mindMapData = {
   center: {
-    label: "Maëlys Barreteau",
+    label: "Maëlys BARRETEAU",
     modalContent: "Pour en savoir plus sur moi, rendez-vous sur la page 'À propos' !",
   },
   branches: [
@@ -26,8 +26,8 @@ const mindMapData = {
       children: [
         { label: "Autonomie", modalContent: "Par mes différentes expériences professionnelles - principalement à DistriCenter - je suis capable de gérer mon travail en complète autonomie." },
         { label: "Créativité", modalContent: "A travers mes passions, j'ai appris à être créative, à imaginer des choses que ça soit des dessins, des sites web, des histoires..." },
-        { label: "Rigueur", modalContent: "J'ai toujours eu une certaine rigueur qui s'est beaucoup développé grâce à mon cursus scolaire." },
-        { label: "Réactivité", modalContent: "Grâce à mon stage d'un mois au Lieu-Dit, j'ai appris à être réactive en cas de soucis." },
+        { label: "Rigueur", modalContent: "J'ai toujours eu une certaine rigueur qui s'est beaucoup développé grâce à mon cursus scolaire, à travers les différents devoirs que j'ai dû rendre." },
+        { label: "Réactivité", modalContent: "Grâce à mon stage d'un mois au Lieu-Dit où j'ai été confronté à tout type de situation, j'ai appris à être réactive en cas de soucis." },
       ],
     },
     {
@@ -35,10 +35,10 @@ const mindMapData = {
       modalContent: "Les outils que je maîtrise, pour voir des exemples de projets, rendez-vous sur la page 'Mes créations' !",
       color: "#339af0",
       children: [
-        { label: "Github", modalContent: "Depuis que j'ai appris à développer je suis capable d'utiliser github pour push des commit." },
-        { label: "Pack Office", modalContent: "Je sais utiliser le suite Office." },
-        { label: "Wordpress", modalContent: "Je suis capable de créer et mettre en place des sites internet." },
-        { label: "Canva", modalContent: "Je suis capable d'utiliser Canva pour créer différents types de design." },
+        { label: "Github", modalContent: "Depuis que j'ai appris à coder je suis capable d'utiliser github, je peux ainsi push différents fichiers." },
+        { label: "Pack Office", modalContent: "Je sais utiliser le suite Office, j'ai appris à l'utiliser grâce à l'école.." },
+        { label: "Wordpress", modalContent: "Je suis capable de créer et mettre en place des sites internet, j'ai suivi un cours de web en deuxième année qui m'a permis de prendre l'objet en main." },
+        { label: "Canva", modalContent: "Je suis capable d'utiliser Canva pour créer différents types de design, je m'amuse souvent à créer différents posts pour les réseaux sociaux." },
       ],
     },
   ],
