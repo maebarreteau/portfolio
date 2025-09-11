@@ -210,10 +210,11 @@ body.modal-open {
 
 .timeline-content {
   background: #fff3c6;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 10px;
   color: black;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
 }
 
 .about-me {
