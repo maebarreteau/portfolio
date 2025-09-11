@@ -2,13 +2,16 @@ const canvas = document.getElementById("tree");
 const ctx = canvas.getContext("2d");
 const container = document.getElementById("canvas-container");
 
-const treeData = {
-  label: "Maëlys Barreteau",
-  modalContent: "Pour en savoir plus sur moi, rendez-vous sur la page 'À propos' !",
-  children: [
+const mindMapData = {
+  center: {
+    label: "Maëlys Barreteau",
+    modalContent: "Pour en savoir plus sur moi, rendez-vous sur la page 'À propos' !",
+  },
+  branches: [
     {
       label: "Compétences opérationnelles",
       modalContent: "Tout ce qui se réfaire aux savoirs-faire",
+      color: "#ff922b",
       children: [
         { label: "Accueil", modalContent: "Grâce à mon expérience en tant qu'agent d'accueil à la PAG, je suis capable d'accueillir, d'informer et de guider un public." },
         { label: "Accompagnement", modalContent: "Grâce à mon engagement à l'AFEV Auvergne, je suis dans la capacité de créer un accompagnement sur la durée afin d'aider des personnes dans leurs devoirs. Grâce à mon bénévolat à Vidéoformes, je sais aussi accompagner un public dans une exposition d'art." },
@@ -19,6 +22,7 @@ const treeData = {
     {
       label: "Compétences comportementales",
       modalContent: "Tout ce qui se réfaire aux savoirs-être",
+      color: "#51cf66",
       children: [
         { label: "Autonomie", modalContent: "Par mes différentes expériences professionnelles - principalement à DistriCenter - je suis capable de gérer mon travail en complète autonomie." },
         { label: "Créativité", modalContent: "A travers mes passions, j'ai appris à être créative, à imaginer des choses que ça soit des dessins, des sites web, des histoires..." },
@@ -29,6 +33,7 @@ const treeData = {
     {
       label: "Connaissances techniques",
       modalContent: "Les outils que je maîtrise, pour voir des exemples de projets, rendez-vous sur la page 'Mes créations' !",
+      color: "#339af0",
       children: [
         { label: "Github", modalContent: "Depuis que j'ai appris à développer je suis capable d'utiliser github pour push des commit." },
         { label: "Pack Office", modalContent: "Je sais utiliser le suite Office." },
@@ -39,10 +44,13 @@ const treeData = {
   ],
 };
 
-const box = { width: 130, height: 50, paddingX: 50, paddingY: 80 };
+const centerBox = { width: 160, height: 60 };
+const branchBox = { width: 130, height: 50 };
+const childBox = { width: 110, height: 40 };
 let boxes = [];
+let centerPosition = { x: 0, y: 0 };
 
-// Polyfill roundRect
+
 if (!CanvasRenderingContext2D.prototype.roundRect) {
   CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
     if(w < 2*r) r=w/2;
@@ -58,99 +66,209 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
   }
 }
 
-// Dessiner une boîte
-function drawBox(x, y, node){
+
+function drawCenterNode(x, y, node) {
+  const centerX = x - centerBox.width / 2;
+  const centerY = y - centerBox.height / 2;
+  
   ctx.fillStyle = "#ffd591";
-  ctx.strokeStyle = "#ff922b";
-  ctx.lineWidth = 2;
-  ctx.roundRect(x, y, box.width, box.height, 8);
+  ctx.strokeStyle = "#e67700";
+  ctx.lineWidth = 3;
+  ctx.roundRect(centerX, centerY, centerBox.width, centerBox.height, 12);
   ctx.fill();
   ctx.stroke();
 
   ctx.fillStyle = "#000";
-  ctx.font = "14px 'Patrick Hand', cursive";
+  ctx.font = "bold 16px 'Patrick Hand', cursive";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
   const words = node.label.split(" ");
-  let line = "";
-  const lines = [];
-  words.forEach(word => {
-    const testLine = line ? line + " " + word : word;
-    if(ctx.measureText(testLine).width > box.width - 10){
-      lines.push(line);
-      line = word;
-    } else line = testLine;
+  ctx.fillText(words[0], x, y - 8);
+  ctx.fillText(words[1], x, y + 8);
+
+  boxes.push({
+    x: centerX, 
+    y: centerY, 
+    width: centerBox.width, 
+    height: centerBox.height, 
+    modalContent: node.modalContent
   });
-  lines.push(line);
-
-  const lineHeight = 16;
-  const centerY = y + box.height/2 - ((lines.length-1)*lineHeight)/2;
-  lines.forEach((line, i)=> ctx.fillText(line, x + box.width/2, centerY + i*lineHeight));
-
-  boxes.push({x, y, width: box.width, height: box.height, modalContent: node.modalContent});
+  
+  return { x: centerX, y: centerY };
 }
 
-// Calculer largeur d'un sous-arbre
-function getSubtreeWidth(node){
-  if(!node.children || node.children.length===0) return box.width;
-  return node.children.map(getSubtreeWidth).reduce((a,b)=>a+b+box.paddingX, -box.paddingX);
-}
 
-// Calculer hauteur totale d'un arbre
-function getTreeHeight(node){
-  if(!node.children || node.children.length===0) return box.height;
-  const heights = node.children.map(getTreeHeight);
-  return box.height + box.paddingY + Math.max(...heights);
-}
+function drawBranchNode(x, y, node, color) {
+  const nodeX = x - branchBox.width / 2;
+  const nodeY = y - branchBox.height / 2;
+  
+  ctx.fillStyle = color + "40"; // Transparence
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.roundRect(nodeX, nodeY, branchBox.width, branchBox.height, 10);
+  ctx.fill();
+  ctx.stroke();
 
-// Dessiner l'arbre récursivement
-function drawTree(node, x, y){
-  drawBox(x, y, node);
-  if(!node.children || node.children.length===0) return;
+  ctx.fillStyle = "#000";
+  ctx.font = "bold 14px 'Patrick Hand', cursive";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
-  const widths = node.children.map(getSubtreeWidth);
-  const totalWidth = widths.reduce((a,b)=>a+b+box.paddingX, -box.paddingX);
-  let startX = x + box.width/2 - totalWidth/2;
+  const words = node.label.split(" ");
+  if (words.length > 1) {
+    ctx.fillText(words[0], x, y - 8);
+    ctx.fillText(words.slice(1).join(" "), x, y + 8);
+  } else {
+    ctx.fillText(node.label, x, y);
+  }
 
-  node.children.forEach((child, i)=>{
-    const childWidth = widths[i];
-    const childX = startX;
-    const childY = y + box.height + box.paddingY;
-
-    ctx.beginPath();
-    ctx.moveTo(x + box.width/2, y + box.height);
-    ctx.lineTo(childX + box.width/2, childY);
-    ctx.strokeStyle = "#8d6e63";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    drawTree(child, childX, childY);
-    startX += childWidth + box.paddingX;
+  boxes.push({
+    x: nodeX, 
+    y: nodeY, 
+    width: branchBox.width, 
+    height: branchBox.height, 
+    modalContent: node.modalContent
   });
 }
 
-// Dessiner l'arbre complet avec canvas aligné à gauche
-function draw(){
+
+function drawChildNode(x, y, node, color) {
+  const nodeX = x - childBox.width / 2;
+  const nodeY = y - childBox.height / 2;
+  
+  ctx.fillStyle = color + "20"; // Plus de transparence
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  ctx.roundRect(nodeX, nodeY, childBox.width, childBox.height, 8);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = "#000";
+  ctx.font = "12px 'Patrick Hand', cursive";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(node.label, x, y);
+
+  boxes.push({
+    x: nodeX, 
+    y: nodeY, 
+    width: childBox.width, 
+    height: childBox.height, 
+    modalContent: node.modalContent
+  });
+}
+
+
+function getConnectionPoint(centerX, centerY, boxWidth, boxHeight, targetX, targetY) {
+  const dx = targetX - centerX;
+  const dy = targetY - centerY;
+  const angle = Math.atan2(dy, dx);
+  
+ 
+  const halfWidth = boxWidth / 2;
+  const halfHeight = boxHeight / 2;
+  
+ 
+  const tanAngle = Math.tan(angle);
+  
+  if (Math.abs(dx) / halfWidth > Math.abs(dy) / halfHeight) {
+    
+    const x = centerX + (dx > 0 ? halfWidth : -halfWidth);
+    const y = centerY + (dx > 0 ? halfWidth : -halfWidth) * tanAngle;
+    return { x, y };
+  } else {
+  
+    const x = centerX + (dy > 0 ? halfHeight : -halfHeight) / tanAngle;
+    const y = centerY + (dy > 0 ? halfHeight : -halfHeight);
+    return { x, y };
+  }
+}
+
+
+function drawCurvedLine(centerX1, centerY1, box1Width, box1Height, centerX2, centerY2, box2Width, box2Height, color) {
+  const start = getConnectionPoint(centerX1, centerY1, box1Width, box1Height, centerX2, centerY2);
+  const end = getConnectionPoint(centerX2, centerY2, box2Width, box2Height, centerX1, centerY1);
+  
+  const controlX = (start.x + end.x) / 2;
+  const controlY = (start.y + end.y) / 2;
+  
+  ctx.beginPath();
+  ctx.moveTo(start.x, start.y);
+  ctx.quadraticCurveTo(controlX, controlY, end.x, end.y);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
+
+
+function drawMindMap() {
   boxes = [];
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const treeWidth = getSubtreeWidth(treeData);
-  const treeHeight = getTreeHeight(treeData);
-  const margin = treeWidth / 2 + box.width + box.paddingX + 25;
+  
+  canvas.width = 1400;
+  canvas.height = 1000;
+  
 
-  // Canvas = largeur réelle de l'arbre + marge
-  canvas.width = treeWidth;
-  canvas.height = treeHeight + 40;
+  centerPosition.x = canvas.width / 2;
+  centerPosition.y = canvas.height / 2;
 
-  // Commence à gauche avec marge
-  const startX = margin;
-  const startY = 20;
 
-  drawTree(treeData, startX, startY);
+  drawCenterNode(centerPosition.x, centerPosition.y, mindMapData.center);
+
+  
+  const branchCount = mindMapData.branches.length;
+  const angleStep = (2 * Math.PI) / branchCount;
+  const branchDistance = 280; 
+
+  mindMapData.branches.forEach((branch, branchIndex) => {
+    const branchAngle = branchIndex * angleStep - Math.PI / 2; // Commencer en haut
+    const branchX = centerPosition.x + Math.cos(branchAngle) * branchDistance;
+    const branchY = centerPosition.y + Math.sin(branchAngle) * branchDistance;
+
+   
+    drawCurvedLine(
+      centerPosition.x, centerPosition.y, centerBox.width, centerBox.height,
+      branchX, branchY, branchBox.width, branchBox.height,
+      branch.color
+    );
+    
+   
+    drawBranchNode(branchX, branchY, branch, branch.color);
+
+   
+    const childCount = branch.children.length;
+    const childAngleRange = Math.PI * 0.8; 
+    const childAngleStep = childAngleRange / (childCount - 1);
+    const childDistance = 160; 
+    
+    
+    const startAngle = branchAngle - childAngleRange / 2;
+
+    branch.children.forEach((child, childIndex) => {
+      const childAngle = startAngle + childIndex * childAngleStep;
+      const childX = branchX + Math.cos(childAngle) * childDistance;
+      const childY = branchY + Math.sin(childAngle) * childDistance;
+
+      
+      const branchConnection = getConnectionPoint(branchX, branchY, branchBox.width, branchBox.height, childX, childY);
+      const childConnection = getConnectionPoint(childX, childY, childBox.width, childBox.height, branchX, branchY);
+      
+      ctx.beginPath();
+      ctx.moveTo(branchConnection.x, branchConnection.y);
+      ctx.lineTo(childConnection.x, childConnection.y);
+      ctx.strokeStyle = branch.color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      
+      drawChildNode(childX, childY, child, branch.color);
+    });
+  });
 }
 
-// Gestion du clic pour modales
+
 canvas.addEventListener("click", function(event){
   const rect = canvas.getBoundingClientRect();
   const mouseX = event.clientX - rect.left;
@@ -164,7 +282,7 @@ canvas.addEventListener("click", function(event){
   }
 });
 
-// Ouvrir modale
+
 function openModal(content){
   const modal = document.getElementById("modal");
   const modalContent = document.getElementById("modal-content");
@@ -173,11 +291,11 @@ function openModal(content){
   document.body.classList.add("modal-open");
 }
 
-// Fermer modale
+
 document.getElementById("modal-close").addEventListener("click", ()=>{
   document.getElementById("modal").style.display = "none";
   document.body.classList.remove("modal-open");
 });
 
-draw();
-window.addEventListener("resize", draw);
+drawMindMap();
+window.addEventListener("resize", drawMindMap);
