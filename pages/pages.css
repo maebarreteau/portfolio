@@ -1,0 +1,90 @@
+:root{
+    --vlen: 22px;    
+    --hgap: 90px;    
+    --line: #8d6e63;
+    --box-bg: #ffd591;
+    --box-border: #ff922b;
+}
+
+body {
+  font-family: 'Patrick Hand', cursive;
+  background: #fef8f2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+#dialogue-box {
+  margin-top: 10px;
+  background: #fff3c6;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-family: 'Patrick Hand', cursive;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#canvas-container {
+  width: 100%;
+  overflow-x: auto;        /* scroll horizontal si canvas large */
+  overflow-y: hidden;      /* pas de scroll vertical */
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: block;          /* éviter le centrage du canvas */
+  text-align: left;        /* canvas aligné à gauche */
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  display: block;          /* pas de marges automatiques */
+  background: transparent;
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  max-width: 300px;
+}
+
+#modal-close {
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+}
+
+body.modal-open {
+  overflow: hidden;        /* bloquer scroll du fond quand modal ouverte */
+}
+
+#character {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* centre verticalement si besoin */
+  margin-top: 40px;
+}
+
+#character img {
+  width: 120px;
+  animation: float 2s infinite alternate;
+}
+
+
