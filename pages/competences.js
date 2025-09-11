@@ -33,7 +33,7 @@ const treeData = {
         { label: "Github", modalContent: "Depuis que j'ai appris à développer je suis capable d'utiliser github pour push des commit." },
         { label: "Pack Office", modalContent: "Je sais utiliser le suite Office." },
         { label: "Wordpress", modalContent: "Je suis capable de créer et mettre en place des sites internet." },
-        { label: "Canva", modalContent: "Je suis capable d'utilsier Canva pour créer différents types de design." },
+        { label: "Canva", modalContent: "Je suis capable d'utiliser Canva pour créer différents types de design." },
       ],
     },
   ],
@@ -137,10 +137,10 @@ function draw(){
 
   const treeWidth = getSubtreeWidth(treeData);
   const treeHeight = getTreeHeight(treeData);
-  const margin = 50;
+  const margin = treeWidth / 2 + box.width + box.paddingX + 25;
 
   // Canvas = largeur réelle de l'arbre + marge
-  canvas.width = treeWidth + 2 * margin;
+  canvas.width = treeWidth;
   canvas.height = treeHeight + 40;
 
   // Commence à gauche avec marge
