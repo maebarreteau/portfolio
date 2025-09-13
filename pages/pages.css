@@ -285,3 +285,43 @@ body.modal-open {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.legend {
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.legend h4 {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.4rem 0;
+}
+
+.legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-dot.pro { background-color: #ff922b; }
+.legend-dot.benevole { background-color: #51cf66; }
+.legend-dot.stage { background-color: #339af0; }
+.legend-dot.assoc { background-color: #f06595; }
