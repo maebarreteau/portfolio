@@ -10,7 +10,7 @@ const mindMapData = {
   branches: [
     {
       label: "Compétences opérationnelles",
-      modalContent: "Tout ce qui se réfère aux savoir-faire",
+      modalContent: "Tout ce qui se réfère aux savoirs-faire",
       color: "#ff922b",
       children: [
         { label: "Accueil", modalContent: "Grâce à mon expérience en tant qu'agent d'accueil à la PAG, je suis capable d'accueillir, d'informer et de guider un public. De plus, j'ai aussi été agent d'accueil à la DRAC. Travailler dans ce milieu culturel a été très enrichissant. Accueillir c'est mettre à l'aise les personnes afin qu'elles passent une bonne expérience." },
@@ -21,7 +21,7 @@ const mindMapData = {
     },
     {
       label: "Compétences comportementales",
-      modalContent: "Tout ce qui se réfère aux savoir-être",
+      modalContent: "Tout ce qui se réfère aux savoirs-être",
       color: "#51cf66",
       children: [
         { label: "Autonomie", modalContent: "Par mes différentes expériences professionnelles, que ce soit à DistriCenter, aux Galeries Lafayettes ou pendant mon stage, j'ai toujours su faire preuve d'autonomie. J'apprécie pouvoir travailler seule mais j'aime aussi travailler en équipe. J'ai souvent pu mixer les deux durant mes différentes expériences. " },
