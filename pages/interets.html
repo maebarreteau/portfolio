@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MES CENTRES D'INTERETS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="interets.css">
+  <link rel="icon" type="image/x-icon" href="../images/icone.webp">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html">Accueil</a>
+  <a href="../pages/competences2.html">Compétences</a>
+  <a href="../pages/creations.html">Créations</a>
+  <a href="../pages/cv.html">CV</a>
+  <a href="../pages/formations2.html">Formations</a>
+  <a href="../pages/experiences.html">Expériences</a>
+  <a href="../pages/interets.html">Centres d'intérêt</a>
+  <a href="../pages/propos.html">À propos</a>
+</nav>
+
+<h1>Mes centres d'intérêts</h1>
+<div id="dialogue-box">
+  Voici mes centres d'intérêts. Clique sur le polaroïd pour en savoir plus.
+</div>
+
+<div class="grid">
+
+  <div class="polaroid" style="--rotate: -3">
+    <img src="../images/musique.jpg" alt="Musique" />
+    <div class="caption">Musique</div>
+    <div class="polaroid-content" hidden>
+      <h2>Musique</h2>
+      <p>
+        Je partage la passion de la musique avec mon père. J'en écoute depuis mon plus jeune âge. 
+        Je suis particulièrement intéressée par le monde du rap. 
+        C'est pourquoi je veux en faire mon métier, je veux travailler dans un domaine qui me passionne 
+        et le monde de la musique m'a toujours fortement intéressé. 
+        Ce que j'aime mettre en avant de la musique c'est les femmes, elles sont souvent oubliées de certaines scènes 
+        et je trouve qu'il est essentiel d'en parler. Je vous mets <a href="https://open.spotify.com/playlist/02ERoU1uZFuVdMWB8p5BVi?si=4dbde6d6d7d84e74">ma playlist 100% féminine</a> pour vous faire découvrir des artistes que j'aime.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="polaroid" style="--rotate: 2">
+    <img src="../images/cinema.jpg" alt="Cinéma" />
+    <div class="caption">Cinéma</div>
+    <div class="polaroid-content" hidden>
+      <h2>Cinéma</h2>
+      <p>
+        Comme la musique, j'aime le cinéma depuis que je suis toute petite. 
+        J'ai été éduqué avec des films comme <em>Retour vers le futur</em>, <em>Les Goonies</em>, <em>Les Gremlins</em>... 
+        Plus tard, je me suis construite avec d'autres références : Quentin Dupieux, Wes Anderson, Wong Kar-Wai. 
+        Le cinéma a été une révélation surtout pendant le confinement. 
+        Je passais mon temps à regarder des films et à découvrir de nouveaux genres que je ne connaissais pas.
+      </p>
+    </div>
+  </div>
+
+ 
+  <div class="polaroid" style="--rotate: -5">
+    <img src="../images/lecture.jpg" alt="Lecture" />
+    <div class="caption">Lecture</div>
+    <div class="polaroid-content" hidden>
+      <h2>Lecture</h2>
+      <p>
+        Je lis depuis mon plus jeune âge. J'ai d'abord grandi avec des livres comme <em>La Cabane Magique</em> 
+        puis mes lectures se sont diversifiées au fil des années. 
+        Maintenant, mes livres préférés sont <em>La vérité sur l'affaire Harry Quebert</em> et <em>Les guerriers de l'hiver</em>. 
+        Depuis quelques temps, j'ai élargi mes lectures avec des bandes dessinées et des mangas. 
+        J'ai un <a href="https://maebarreteau.github.io/sdk-/">blog</a> où je parle de toutes les choses que j'ai consommées récemment au niveau culturel. 
+        Pour l'instant, je parle surtout des deux derniers genres évoqués.
+      </p>
+    </div>
+  </div>
+
+ 
+  <div class="polaroid" style="--rotate: 4">
+    <img src="../images/jeu.jpg" alt="Jeux" />
+    <div class="caption">Jeux</div>
+    <div class="polaroid-content" hidden>
+      <h2>Jeux</h2>
+      <p>
+        J’aime jouer à différents types de jeux, que ce soit sur console, PC ou jeux de société. 
+        C’est un moyen pour moi de partager des moments avec mes amis et ma famille, 
+        tout en découvrant de nouvelles expériences interactives. J'ai grandi avec des jeux comme <em>Zelda Twilight Princess</em> sur la WII,
+        maintenant je préfère les jeux à choix comme <em>Until Dawn</em> ou <em>Life Is Strange</em>.
+        J'aime aussi les jeux de société, j'en ai une belle collection de plus de 100 jeux. Je joue surtout à des jeux comme <em>Leaders</em>, <em>Le destin de la communauté de l'anneau</em> ou <em>Dead Cells : le jeu de société</em>.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <img id="modalImg" src="" alt="" />
+    <p id="modalDesc"></p>
+    <span class="close-btn" id="closeModal">&times;</span>
+  </div>
+</div>
+
+<a href="../index.html" id="character">
+    <img src="../images/icone.webp" alt="Guide">
+</a>
+
+<script src="interets.js"></script>
+
+</body>
+</html>

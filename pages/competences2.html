@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MON CV</title>
+    <title>MES COMPETENCES</title>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="competences2.css">
     <link rel="icon" type="image/x-icon" href="../images/icone.webp">
 </head>
+
 <body>
 
-   <nav class="navbar">
+<nav class="navbar">
   <a href="../index.html">Accueil</a>
   <a href="../pages/competences2.html">Compétences</a>
   <a href="../pages/creations.html">Créations</a>
@@ -21,12 +23,27 @@
   <a href="../pages/propos.html">À propos</a>
 </nav>
 
-    <h1>Déroulez pour voir mon CV !</h1>
-    <img src="../images/cv.png" alt="Mon CV" style="width:100%; max-width:800px; display:block; margin: 20px auto;">
-    
-    <a href="../index.html" id="character">
+      <h1>Mes compétences</h1>
+    <div id="dialogue-box">
+        Vous êtes sur ma page de compétences. N'hésitez pas à cliquer sur les camemberts pour en savoir plus.
+    </div>  
+
+    <div class="charts-row" id="charts-row"></div>
+
+ <div class="modal" id="modal">
+  <div class="modal-content">
+    <span id="modal-close">&times;</span>
+    <h3 id="modal-title">Titre</h3>
+    <div id="modal-text"></div>
+  </div>
+</div>
+
+ <a href="../index.html" id="character">
     <img src="../images/icone.webp" alt="Guide">
 </a>
+
+  <script src="competences2.js"></script>
+
 
 </body>
 </html>

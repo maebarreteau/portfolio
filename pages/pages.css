@@ -1,3 +1,29 @@
+.navbar {
+  position: fixed;   
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-bottom: 2px solid #333;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #4f46e5;
+}
+
 :root{
     --vlen: 22px;    
     --hgap: 90px;    
@@ -17,7 +43,7 @@ body {
   overflow-x: hidden;
   position: relative;
   margin: 0;
-  padding: 0;
+  padding-top: 50px;
 }
 
 h1 {
@@ -35,18 +61,18 @@ h1 {
 
 #canvas-container {
   width: 100%;
-  overflow-x: auto;        /* scroll horizontal si canvas large */
-  overflow-y: hidden;      /* pas de scroll vertical */
+  overflow-x: auto;     
+  overflow-y: hidden;      
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  display: block;          /* éviter le centrage du canvas */
-  text-align: left;        /* canvas aligné à gauche */
+  display: block;          
+  text-align: left;        
   padding: 0;
   margin: 0;
 }
 
 canvas {
-  display: block;          /* pas de marges automatiques */
+  display: block;          
   background: transparent;
 }
 
@@ -72,13 +98,13 @@ canvas {
 }
 
 body.modal-open {
-  overflow: hidden;        /* bloquer scroll du fond quand modal ouverte */
+  overflow: hidden;        
 }
 
 #character {
   display: flex;
-  justify-content: center; /* centre horizontalement */
-  align-items: center;     /* centre verticalement si besoin */
+  justify-content: center; 
+  align-items: center;     
   margin-top: 40px;
 }
 
@@ -89,21 +115,22 @@ body.modal-open {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colonnes par défaut */
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding: 2rem;
-  justify-items: center; /* centre les cartes dans leur colonne */
+  justify-items: center; 
 }
 
 @media (max-width: 1024px) {
   .cards-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media (max-width: 600px) {
   .cards-container {
-    grid-template-columns: 1fr; /* 1 colonne sur mobile */
+    grid-template-columns: 1fr; 
+
   }
 }
 
@@ -325,3 +352,81 @@ body.modal-open {
 .legend-dot.benevole { background-color: #51cf66; }
 .legend-dot.stage { background-color: #339af0; }
 .legend-dot.assoc { background-color: #f06595; }
+
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 30px;
+padding: 40px;
+max-width: 1200px;
+}
+
+
+.polaroid {
+background: #fff;
+padding: 10px 10px 20px 10px;
+box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+transform: rotate(calc(var(--rotate) * 1deg));
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+cursor: pointer;
+}
+
+
+.polaroid:hover {
+transform: scale(1.05) rotate(0deg);
+box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+
+.polaroid img {
+max-width: 100%;
+display: block;
+}
+
+
+.caption {
+text-align: center;
+margin-top: 10px;
+font-size: 14px;
+color: #333;
+}
+
+.close-btn {
+background: #333;
+color: #fff;
+border: none;
+padding: 8px 12px;
+margin-top: 10px;
+cursor: pointer;
+border-radius: 4px;
+}
+
+.charts-row {
+      display: flex;
+      flex-wrap: wrap;      /* permet plusieurs lignes */
+      gap: 20px;            /* espace horizontal et vertical */
+      justify-content: flex-start;
+    }
+
+    .chart-container {
+      display: flex;
+      flex-direction: column; /* label sous le camembert */
+      align-items: center;
+      width: 120px;           /* largeur fixe pour alignement */
+    }
+
+    canvas {
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .label {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+    }
